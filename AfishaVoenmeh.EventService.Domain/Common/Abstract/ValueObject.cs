@@ -40,7 +40,7 @@ public abstract class ValueObject
     {
         return GetEqualityComponents()
             .Select(x => x != null ? x.GetHashCode() : 0)
-            .Aggregate((x,y) => x ^ y)
+            .Aggregate((x, y) => x ^ y);
     }
 
     public static bool operator ==(ValueObject one, ValueObject two)

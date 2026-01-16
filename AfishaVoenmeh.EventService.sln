@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36908.2 d17.14
+VisualStudioVersion = 17.14.36908.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfishaVoenmeh.EventService.WebAPI", "AfishaVoenmeh.EventService.WebAPI\AfishaVoenmeh.EventService.WebAPI.csproj", "{F2992C54-82EB-402F-BE9E-C7B04D673D5B}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfishaVoenmeh.EventService.Contracts", "AfishaVoenmeh.EventService.Contracts\AfishaVoenmeh.EventService.Contracts.csproj", "{A8EE663F-5173-470A-8302-F37B045C784E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfishaVoenmeh.EventService.Infrastructure", "AfishaVoenmeh.EventService.Infrastructure\AfishaVoenmeh.EventService.Infrastructure.csproj", "{5D0A31A0-867B-4BB9-8F0D-CFD04A43D5E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfishaVoenmeh.EventService.Domain.Tests", "Tests\AfishaVoenmeh.EventService.Domain.Tests\AfishaVoenmeh.EventService.Domain.Tests.csproj", "{97EA8D2E-BEA2-492B-A470-50B3430F8C8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{5D0A31A0-867B-4BB9-8F0D-CFD04A43D5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D0A31A0-867B-4BB9-8F0D-CFD04A43D5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D0A31A0-867B-4BB9-8F0D-CFD04A43D5E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97EA8D2E-BEA2-492B-A470-50B3430F8C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97EA8D2E-BEA2-492B-A470-50B3430F8C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97EA8D2E-BEA2-492B-A470-50B3430F8C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97EA8D2E-BEA2-492B-A470-50B3430F8C8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{97EA8D2E-BEA2-492B-A470-50B3430F8C8B} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FAB05223-5958-4BAC-8FC3-99DB828DA9BF}
