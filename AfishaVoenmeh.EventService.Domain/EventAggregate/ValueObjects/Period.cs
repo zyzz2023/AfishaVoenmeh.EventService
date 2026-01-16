@@ -1,37 +1,38 @@
-﻿using AfishaVoenmeh.EventService.Domain.Common;
+﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
+using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using ErrorOr;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects
+namespace AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
+
+public class Period : ValueObject
 {
-    public class Period : ValueObject
+    public DateTime StartsAt { get; private set; } // Начало мероприятия
+    public DateTime EndsAt { get; private set; } // Конец мероприятия
+
+    protected Period() { } // EF Core
+
+    private Period(DateTime startsAt, DateTime endsAt)
     {
-        public DateTime StartTime { get; private set; }
-        public DateTime EndTime { get; private set; }
+        StartsAt = startsAt;
+        EndsAt = endsAt;
+    }
 
-        protected Period() { } // EF Core
+    public static ErrorOr<Period> Create(DateTime startsAt, DateTime endsAt)
+    {
+        if (startsAt >= endsAt)
+            return DomainErrors.InvalidPeriod;
 
-        private Period(DateTime startTime, DateTime endTime)
-        {
-            StartTime = startTime;
-            EndTime = endTime;
-        }
+        if(startsAt < DateTime.UtcNow)
+            return DomainErrors.PeriodInPast;
 
-        public ErrorOr<Period> Create(DateTime startTime, DateTime endTime)
-        {
-            if (startTime > endTime || startTime == endTime)
-                return Error.Validation("Period_Invalid", "The end date must be less than the start date");
+        if ((endsAt - startsAt).TotalHours > 8)
+            return DomainErrors.LongPeriod;
 
-            return new Period(startTime, endTime);
-        }
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return StartTime;
-            yield return EndTime;
-        }
+        return new Period(startsAt, endsAt);
+    }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return StartsAt;
+        yield return EndsAt;
     }
 }

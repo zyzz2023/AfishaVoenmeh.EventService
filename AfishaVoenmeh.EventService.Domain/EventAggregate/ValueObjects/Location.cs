@@ -1,4 +1,5 @@
-﻿using AfishaVoenmeh.EventService.Domain.Common;
+﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
+using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using ErrorOr;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 
 public class Location : ValueObject
 {
-    public string City { get; private set; }
-    public string Street { get; private set; }
-    public int? Number { get; private set; }
+    public string City { get; private set; } = string.Empty;
+    public string Street { get; private set; } = string.Empty;
+    public int? Number { get; private set; } = default;
 
     protected Location() { } // EF Core
 
@@ -23,16 +24,13 @@ public class Location : ValueObject
         Number = number;
     }
 
-    public ErrorOr<Location> Create(string city, string street, int number)
+    public static ErrorOr<Location> Create(string city, string street, int number)
     {
-        if(string.IsNullOrEmpty(city))
-            return Error.Validation("City_Null", "The city cannot be empty");
-
-        if (string.IsNullOrEmpty(street))
-            return Error.Validation("Street_Null", "The street cannot be empty");
+        if (string.IsNullOrEmpty(city) || string.IsNullOrEmpty(street))
+            return DomainErrors.EmptyAddress;
 
         if (number <= 0)
-            return Error.Validation("Number_Incorrect", "The number must be greater than zero");
+            return DomainErrors.IncorrectAddressNumber;
 
         return new Location(city, street, number);
     }
@@ -40,6 +38,6 @@ public class Location : ValueObject
     {
         yield return City;
         yield return Street;
-        yield return Number;
+        yield return Number!;
     }
 }

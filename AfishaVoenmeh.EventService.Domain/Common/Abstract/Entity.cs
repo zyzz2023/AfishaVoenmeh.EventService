@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AfishaVoenmeh.EventService.Domain.Common;
+namespace AfishaVoenmeh.EventService.Domain.Common.Abstract;
 
 public abstract class Entity<TId> : IEquatable<Entity<TId>>
     where TId : notnull

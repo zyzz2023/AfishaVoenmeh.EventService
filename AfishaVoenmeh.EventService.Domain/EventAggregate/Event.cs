@@ -1,20 +1,15 @@
-﻿using AfishaVoenmeh.EventService.Domain.Common;
+﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
+using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 using ErrorOr;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AfishaVoenmeh.EventService.Domain.EventAggregate;
 
 public class Event : AggregateRoot<Guid>
 {
-    public Guid Id { get; private set; }
-    public string Title { get; private set; }
-    public string Description { get; private set; }
+    public string Title { get; private set; } = string.Empty;
+    public string Description { get; private set; } = string.Empty;
 
     public Period Period { get; private set; }
     public SeatsNumber SeatsNumber { get; private set; }
@@ -63,10 +58,10 @@ public class Event : AggregateRoot<Guid>
         )
     {
         if (string.IsNullOrEmpty(title))
-            return Error.Validation("Title_Null", "Title cannot be empty");
+            return DomainErrors.EmptyTitle;
 
-        if(string.IsNullOrEmpty(description))
-            return Error.Validation("Description_Null", "Description cannot be empty");
+        if (string.IsNullOrEmpty(description))
+            return DomainErrors.EmptyDescription;
 
         return new Event(
             title, 

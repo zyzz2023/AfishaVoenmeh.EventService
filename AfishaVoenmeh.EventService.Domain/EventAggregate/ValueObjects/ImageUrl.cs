@@ -1,10 +1,6 @@
-﻿using AfishaVoenmeh.EventService.Domain.Common;
+﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
+using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using ErrorOr;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 
@@ -16,13 +12,13 @@ public class ImageUrl : ValueObject
 
     private ImageUrl(string value) => Value = value;
     
-    public ErrorOr<ImageUrl> Create(string url)
+    public static ErrorOr<ImageUrl> Create(string url)
     {
         if (string.IsNullOrEmpty(url))
-            return Error.Validation("Url_Null", "The url cannot be empty");
+            return DomainErrors.EmptyUrl;
 
         if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
-            return Error.Validation("Url_Incorrect", "Invalid url format");
+            return DomainErrors.BadUrl;
 
         return new ImageUrl(url);
     }
@@ -31,5 +27,4 @@ public class ImageUrl : ValueObject
     {
         yield return Value;
     }
-
 }

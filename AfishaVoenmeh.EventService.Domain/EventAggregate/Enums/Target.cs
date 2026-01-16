@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AfishaVoenmeh.EventService.Domain.EventAggregate.Enums
+namespace AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
+
+public enum Target
 {
-    public enum Target
-    {
-        Student = 1,
-        Lecturer = 2
-    }
+    Student = 1,
+    Lecturer = 2
 }

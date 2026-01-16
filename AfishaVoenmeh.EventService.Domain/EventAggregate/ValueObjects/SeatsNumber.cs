@@ -1,10 +1,6 @@
-﻿using AfishaVoenmeh.EventService.Domain.Common;
+﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
+using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using ErrorOr;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 
@@ -21,10 +17,16 @@ public class SeatsNumber : ValueObject
         Current = current;
     }
 
-    public ErrorOr<SeatsNumber> Create(int total, int current)
+    public static ErrorOr<SeatsNumber> Create(int total, int current)
     {
         if (total <= 0 || current <= 0)
-            return Error.Validation("Number_Of_Seats_Incorrect", "The number of seats cannot be less than or equal to zero");
+            return DomainErrors.IncorrectSeatsNumber;
+
+        if (total > 200)
+            return DomainErrors.OverLimitSeatsNumber;
+
+        if (current > total)
+            return DomainErrors.CurrentSeatsIncorrect;
 
         return new SeatsNumber(total, current);
     }
