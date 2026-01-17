@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using AfishaVoenmeh.EventService.Domain.Common.Interfaces;
+using System;
 namespace AfishaVoenmeh.EventService.Domain.Common.Abstract;
 
-public abstract class Entity<TId> : IEquatable<Entity<TId>>
+public abstract class Entity<TId> : IEquatable<Entity<TId>>, IEntity<TId>
     where TId : notnull
 {
     public TId Id { get; protected set; }

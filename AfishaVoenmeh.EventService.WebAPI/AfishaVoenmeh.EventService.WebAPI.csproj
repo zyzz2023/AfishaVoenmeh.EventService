@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.Application\AfishaVoenmeh.EventService.Application.csproj" />
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.Contracts\AfishaVoenmeh.EventService.Contracts.csproj" />
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.Infrastructure\AfishaVoenmeh.EventService.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

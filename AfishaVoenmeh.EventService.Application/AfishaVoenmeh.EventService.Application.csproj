@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.Domain\AfishaVoenmeh.EventService.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
