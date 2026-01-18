@@ -11,29 +11,39 @@ public class SeatsNumber : ValueObject
 
     protected SeatsNumber() { } // EF Core
 
-    private SeatsNumber(int total, int current)
+    private SeatsNumber(int total)
     { 
         Total = total;
-        Current = current;
+        Current = total;
     }
 
-    public static ErrorOr<SeatsNumber> Create(int total, int current)
+    public static ErrorOr<SeatsNumber> Create(int total)
     {
-        if (total <= 0 || current <= 0)
+        if (total <= 0)
             return DomainErrors.IncorrectSeatsNumber;
 
         if (total > 200)
             return DomainErrors.OverLimitSeatsNumber;
 
-        if (current > total)
-            return DomainErrors.CurrentSeatsIncorrect;
-
-        return new SeatsNumber(total, current);
+        return new SeatsNumber(total);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Total;
         yield return Current;
+    }
+
+    public ErrorOr<bool> ReduceQuantityCurrentSeats(int quantity)
+    {
+        if (quantity <= 0)
+            return DomainErrors.IncorrectSeatsNumber;
+
+        if(quantity > Total)
+            return DomainErrors.CurrentSeatsIncorrect;
+
+        Current -= quantity;
+
+        return true;
     }
 }
