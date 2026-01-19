@@ -1,7 +1,6 @@
 ﻿using AfishaVoenmeh.EventService.Application.Common.Interfaces.Persistence;
 using AfishaVoenmeh.EventService.Application.Features.Event.Common;
 using ErrorOr;
-using Mapster;
 using MapsterMapper;
 using MediatR;
 

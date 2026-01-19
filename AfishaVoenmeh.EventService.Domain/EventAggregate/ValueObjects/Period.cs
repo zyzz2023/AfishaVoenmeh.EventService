@@ -19,12 +19,6 @@ public class Period : ValueObject
 
     public static ErrorOr<Period> Create(DateTime startsAt, DateTime endsAt)
     {
-        if (startsAt >= endsAt)
-            return DomainErrors.InvalidPeriod;
-
-        if(startsAt < DateTime.UtcNow)
-            return DomainErrors.PeriodInPast;
-
         if ((endsAt - startsAt).TotalHours > 8)
             return DomainErrors.LongPeriod;
 

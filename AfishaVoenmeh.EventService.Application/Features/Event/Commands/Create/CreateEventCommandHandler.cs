@@ -27,18 +27,9 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Err
             return period.FirstError;
 
         var seatsNumber = SeatsNumber.Create(request.TotalSeats);
-        if(seatsNumber.IsError)
-            return seatsNumber.FirstError;
-
         var imageUrl = ImageUrl.Create(request.ImageUrl);
-        if(imageUrl.IsError)
-            return imageUrl.FirstError;
-
         var location = Location.Create(request.City, request.Street, request.Number);
-        if(location.IsError)
-            return location.FirstError;
 
-        // Сделать валидатор, который будет валидирвать строковые значения enum
         var status = Enum.Parse<Status>(request.Status, true);
         var target = Enum.Parse<Target>(request.Target, true);
 
@@ -46,17 +37,14 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Err
             request.Title,
             request.Description,
             period.Value,
-            seatsNumber.Value,
-            imageUrl.Value,
-            location.Value,
+            seatsNumber,
+            imageUrl,
+            location,
             status,
             target);
 
-        if (newEvent.IsError)
-            return newEvent.FirstError;
+        await _eventRepository.AddAsync(newEvent, cancellationToken);
 
-        await _eventRepository.AddAsync(newEvent.Value, cancellationToken);
-
-        return _mapper.Map<EventDto>(newEvent.Value);
+        return _mapper.Map<EventDto>(newEvent);
     }
 }

@@ -1,8 +1,6 @@
 ﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
-using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
-using ErrorOr;
 
 namespace AfishaVoenmeh.EventService.Domain.EventAggregate;
 
@@ -46,7 +44,7 @@ public class Event : AggregateRoot<Guid>
         CreatedAt = DateTime.UtcNow;
     }
 
-    public static ErrorOr<Event> Create(
+    public static Event Create(
         string title,
         string description,
         Period period,
@@ -57,12 +55,6 @@ public class Event : AggregateRoot<Guid>
         Target target
         )
     {
-        if (string.IsNullOrEmpty(title))
-            return DomainErrors.EmptyTitle;
-
-        if (string.IsNullOrEmpty(description))
-            return DomainErrors.EmptyDescription;
-
         return new Event(
             title, 
             description, 

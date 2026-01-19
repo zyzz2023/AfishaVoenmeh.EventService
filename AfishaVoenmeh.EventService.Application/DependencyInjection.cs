@@ -1,4 +1,6 @@
-﻿using Mapster;
+﻿using AfishaVoenmeh.EventService.Application.Common.Behaviors;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -13,6 +15,17 @@ public static class DependencyInjection
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
 
+        services.AddValidators();
+
         return services;
+    }
+
+    private static void AddValidators(this IServiceCollection services)
+    {
+        services.AddScoped(
+            typeof(IPipelineBehavior<,>),
+            typeof(ValidationBehavior<,>));
+
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

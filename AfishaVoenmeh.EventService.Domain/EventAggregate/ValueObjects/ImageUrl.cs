@@ -11,17 +11,8 @@ public class ImageUrl : ValueObject
     protected ImageUrl() { } // EF Core
 
     private ImageUrl(string value) => Value = value;
-    
-    public static ErrorOr<ImageUrl> Create(string url)
-    {
-        if (string.IsNullOrEmpty(url))
-            return DomainErrors.EmptyUrl;
 
-        if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
-            return DomainErrors.BadUrl;
-
-        return new ImageUrl(url);
-    }
+    public static ImageUrl Create(string url) => new(url);
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

@@ -17,16 +17,7 @@ public class SeatsNumber : ValueObject
         Current = total;
     }
 
-    public static ErrorOr<SeatsNumber> Create(int total)
-    {
-        if (total <= 0)
-            return DomainErrors.IncorrectSeatsNumber;
-
-        if (total > 200)
-            return DomainErrors.OverLimitSeatsNumber;
-
-        return new SeatsNumber(total);
-    }
+    public static SeatsNumber Create(int total) => new(total);
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

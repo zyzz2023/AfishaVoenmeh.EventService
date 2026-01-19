@@ -3,9 +3,11 @@ using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using ErrorOr;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 
@@ -24,16 +26,9 @@ public class Location : ValueObject
         Number = number;
     }
 
-    public static ErrorOr<Location> Create(string city, string street, int number)
-    {
-        if (string.IsNullOrEmpty(city) || string.IsNullOrEmpty(street))
-            return DomainErrors.EmptyAddress;
+    public static Location Create(string city, string street, int number) =>
+        new (city, street, number);
 
-        if (number <= 0)
-            return DomainErrors.IncorrectAddressNumber;
-
-        return new Location(city, street, number);
-    }
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return City;
