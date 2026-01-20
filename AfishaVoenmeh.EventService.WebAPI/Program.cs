@@ -1,5 +1,6 @@
 using AfishaVoenmeh.EventService.Application;
 using AfishaVoenmeh.EventService.Infrastructure;
+using AfishaVoenmeh.EventService.Infrastructure.Common;
 using AfishaVoenmeh.EventService.WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
