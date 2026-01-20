@@ -1,4 +1,5 @@
 ﻿using AfishaVoenmeh.EventService.Application.Common.Mappings;
+using AfishaVoenmeh.EventService.WebAPI.Common.Handlers;
 using AfishaVoenmeh.EventService.WebAPI.Common.Mappings;
 using Mapster;
 using Microsoft.OpenApi;
@@ -14,6 +15,8 @@ public static class DependencyInjection
         services.AddConfiguredSwagger();
 
         services.AddConfiguredMapster();
+
+        services.AddGlobalExceptionHandler();
 
         return services;
     }
@@ -43,5 +46,18 @@ public static class DependencyInjection
 
         services.AddSingleton(configuration);
         services.AddMapster();
+    }
+
+    private static void AddGlobalExceptionHandler(this IServiceCollection services)
+    {
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+
+        services.AddProblemDetails(options =>
+        {
+            options.CustomizeProblemDetails = context =>
+            {
+                context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
+            };
+        });
     }
 }

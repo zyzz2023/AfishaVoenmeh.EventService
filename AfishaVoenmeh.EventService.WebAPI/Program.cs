@@ -18,6 +18,8 @@ var app = builder.Build();
         app.UseSwaggerUI();
     }
 
+    app.UseExceptionHandler();
+
     app.UseHttpsRedirection();
     app.MapControllers();
     app.Run();
