@@ -1,8 +1,6 @@
-﻿using AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
+﻿namespace AfishaVoenmeh.EventService.Contracts.Responses;
 
-namespace AfishaVoenmeh.EventService.Application.Features.Event.Common;
-
-public class EventDto
+public class EventResponse
 {
     public Guid Id { get; init; }
     public string Title { get; init; } = string.Empty;
@@ -12,7 +10,7 @@ public class EventDto
     public int TotalSeats { get; init; }
     public int CurrentSeats { get; init; }
     public string ImageUrl { get; init; } = string.Empty;
-    public LocationDto Location { get; init; }
-    public Status Status { get; init; }
-    public Target Target { get; init; }
+    public LocationResponse Location { get; init; }
+    public string Status { get; init; } = string.Empty;
+    public string Target { get; init; } = string.Empty;
 }

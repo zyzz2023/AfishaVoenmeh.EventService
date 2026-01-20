@@ -1,9 +1,9 @@
 ﻿using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Create;
 using AfishaVoenmeh.EventService.Application.Features.Event.Queries.GetById;
 using AfishaVoenmeh.EventService.Contracts.Requests;
+using AfishaVoenmeh.EventService.Contracts.Responses;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AfishaVoenmeh.EventService.WebAPI.Controllers;
@@ -27,10 +27,10 @@ public class EventsController : ControllerBase
         var query = new GetEventByIdQuery(id);
 
         var result = await _sender.Send(query, ct);
-        if (result.IsError)
-            return BadRequest(result.FirstError); // Исправить путем добаления общей обработки ошибок
-
-        return Ok(result.Value);
+        
+        return result.Match<IActionResult>(
+            eventDto => Ok(_mapper.Map<EventResponse>(eventDto)),
+            errors => BadRequest(errors));
     }
 
     [HttpPost]
@@ -39,9 +39,9 @@ public class EventsController : ControllerBase
         var command = _mapper.Map<CreateEventCommand>(request);
 
         var result = await _sender.Send(command, ct);
-        if (result.IsError)
-            return BadRequest(result.FirstError);
 
-        return Created(HttpContext.Request.Path.Value, result.Value);
+        return result.Match<IActionResult>(
+            eventDto => Created(HttpContext.Request.Path, _mapper.Map<EventResponse>(eventDto)),
+            errors => BadRequest(errors));
     }
 }
