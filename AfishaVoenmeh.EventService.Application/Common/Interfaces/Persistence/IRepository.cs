@@ -10,8 +10,8 @@ public interface IRepository<TEntity>
     Task<IEnumerable<TEntity?>> GetAllAsync(CancellationToken ct = default);
     Task AddAsync(TEntity entity, CancellationToken ct = default);
 
-    void Update(TEntity entity);
-    void Delete(TEntity entity);
+    Task UpdateAsync(TEntity entity, CancellationToken ct = default);
+    Task DeleteAsync(TEntity entity, CancellationToken ct = default);
 
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct = default);
     Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct = default);

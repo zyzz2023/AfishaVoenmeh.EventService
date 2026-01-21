@@ -68,26 +68,19 @@ public class Event : AggregateRoot<Guid>
             );
     }
 
+    public void ChangeTitle(string title) => Title = title;
+
+    public void ChangeDescription(string description) => Description = description;
+
+    public void ChangePeriod(Period period) => Period = period;
+
+    public void ChangeSeatsNumber(SeatsNumber seatsNumber) => SeatsNumber = seatsNumber;
+
+    public void ChangeImageUrl(ImageUrl imageUrl) => ImageUrl = imageUrl;
+
+    public void ChangeLocation(Location location) => Location = location;
+
     public void ChangeStatus(Status status) => Status = status;
     
     public void ChangeTarget(Target target) => Target = target;
-
-    public void Update(
-        string title,
-        string description,
-        Period period,
-        SeatsNumber seatsNumber,
-        ImageUrl imageUrl,
-        Location location,
-        Target target)
-    {
-        Title = title;
-        Description = description;
-
-        Period = period;
-        SeatsNumber = seatsNumber;
-        ImageUrl = imageUrl;
-        Location = location;
-        Target = target;
-    }
 }

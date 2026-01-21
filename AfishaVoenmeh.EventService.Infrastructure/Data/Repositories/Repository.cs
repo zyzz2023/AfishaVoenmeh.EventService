@@ -38,16 +38,18 @@ public abstract class Repository<TEntity> : IRepository<TEntity>
         await _context.SaveChangesAsync(ct);
     }
 
-    public void Update(TEntity entity)
+    public async Task UpdateAsync(TEntity entity, CancellationToken ct = default)
     {
         _context.Update(entity);
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync(ct);
     }
 
-    public void Delete(TEntity entity)
+    public async Task DeleteAsync(TEntity entity, CancellationToken ct = default)
     {
         _context.Remove(entity);
+
+        await _context.SaveChangesAsync(ct);
     }
 
     public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct = default)

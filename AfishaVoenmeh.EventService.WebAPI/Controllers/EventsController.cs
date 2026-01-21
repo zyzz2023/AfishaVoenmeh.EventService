@@ -1,9 +1,9 @@
 ﻿using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Create;
+using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Delete;
 using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Update;
 using AfishaVoenmeh.EventService.Application.Features.Event.Queries.GetById;
 using AfishaVoenmeh.EventService.Contracts.Requests;
 using AfishaVoenmeh.EventService.Contracts.Responses;
-using ErrorOr;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +56,18 @@ public class EventsController : ControllerBase
 
         return result.Match<IActionResult>(
             eventDto => Created(HttpContext.Request.Path, _mapper.Map<EventResponse>(eventDto)),
+            errors => BadRequest(errors));
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteEventAsync([FromRoute] Guid id, CancellationToken ct)
+    {
+        var command = new DeleteEventCommand(id);
+
+        var result = await _sender.Send(command, ct);
+
+        return result.Match<IActionResult>(
+            success => NoContent(),
             errors => BadRequest(errors));
     }
 }

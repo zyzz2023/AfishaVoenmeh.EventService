@@ -52,7 +52,7 @@ public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
         RuleFor(c => c.ImageUrl)
             .Must(url => !string.IsNullOrWhiteSpace(url))
             .WithMessage("The url cannot be empty.")
-            .Must(url => !Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
             .WithMessage("Invalid url format.");
 
         RuleFor(c => c.Target)

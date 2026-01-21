@@ -1,10 +1,5 @@
 ﻿using AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AfishaVoenmeh.EventService.Application.Features.Event.Commands.Update;
 
@@ -61,7 +56,7 @@ public class UpdateEventCommandValidator : AbstractValidator<UpdateEventCommand>
         RuleFor(c => c.ImageUrl)
             .Must(url => !string.IsNullOrWhiteSpace(url))
             .WithMessage("The url cannot be empty.")
-            .Must(url => !Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
             .WithMessage("Invalid url format.");
 
         RuleFor(c => c.Target)

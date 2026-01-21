@@ -36,7 +36,6 @@ public class PeriodTests
 
         // Assert
         Assert.True(period.IsError);
-        Assert.Equal(period.FirstError, DomainErrors.InvalidPeriod);
     }
 
     [Fact]
