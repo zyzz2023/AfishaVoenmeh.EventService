@@ -51,10 +51,11 @@ public class Event : AggregateRoot<Guid>
         SeatsNumber seatsNumber,
         ImageUrl imageUrl,
         Location location,
-        Status status,
         Target target
         )
     {
+        Status status = Status.Created;
+
         return new Event(
             title, 
             description, 

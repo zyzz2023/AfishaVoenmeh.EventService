@@ -55,12 +55,6 @@ public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
             .Must(url => !Uri.IsWellFormedUriString(url, UriKind.Absolute))
             .WithMessage("Invalid url format.");
 
-        RuleFor(c => c.Status)
-            .NotNull()
-            .WithMessage("Status cannot be null.")
-            .Must(s => Enum.TryParse<Status>(s, true, out _))
-            .WithMessage("Incorrect status.");
-
         RuleFor(c => c.Target)
             .NotNull()
             .WithMessage("Target cannot be null.")

@@ -16,5 +16,4 @@ public record CreateEventRequest(
     string City,
     string Street,
     int Number,
-    string Status,
     string Target);

@@ -15,6 +15,5 @@ public record CreateEventCommand(
     string City,
     string Street,
     int Number,
-    string Status,
     string Target
     ) : IRequest<ErrorOr<EventDto>>;

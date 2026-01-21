@@ -30,7 +30,6 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Err
         var imageUrl = ImageUrl.Create(request.ImageUrl);
         var location = Location.Create(request.City, request.Street, request.Number);
 
-        var status = Enum.Parse<Status>(request.Status, true);
         var target = Enum.Parse<Target>(request.Target, true);
 
         var newEvent = Domain.EventAggregate.Event.Create(
@@ -40,7 +39,6 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Err
             seatsNumber,
             imageUrl,
             location,
-            status,
             target);
 
         await _eventRepository.AddAsync(newEvent, cancellationToken);
