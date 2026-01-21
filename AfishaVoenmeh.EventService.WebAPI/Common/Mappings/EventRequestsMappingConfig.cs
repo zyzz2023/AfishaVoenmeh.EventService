@@ -1,4 +1,5 @@
 ﻿using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Create;
+using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Update;
 using AfishaVoenmeh.EventService.Contracts.Requests;
 using Mapster;
 
@@ -9,5 +10,7 @@ public class EventRequestsMappingConfig : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<CreateEventRequest, CreateEventCommand>();
+
+        config.NewConfig<UpdateEventRequest, UpdateEventCommand>();
     }
 }

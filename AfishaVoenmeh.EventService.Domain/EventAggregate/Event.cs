@@ -71,4 +71,23 @@ public class Event : AggregateRoot<Guid>
     public void ChangeStatus(Status status) => Status = status;
     
     public void ChangeTarget(Target target) => Target = target;
+
+    public void Update(
+        string title,
+        string description,
+        Period period,
+        SeatsNumber seatsNumber,
+        ImageUrl imageUrl,
+        Location location,
+        Target target)
+    {
+        Title = title;
+        Description = description;
+
+        Period = period;
+        SeatsNumber = seatsNumber;
+        ImageUrl = imageUrl;
+        Location = location;
+        Target = target;
+    }
 }

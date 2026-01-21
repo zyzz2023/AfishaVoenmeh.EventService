@@ -41,6 +41,8 @@ public abstract class Repository<TEntity> : IRepository<TEntity>
     public void Update(TEntity entity)
     {
         _context.Update(entity);
+
+        _context.SaveChanges();
     }
 
     public void Delete(TEntity entity)

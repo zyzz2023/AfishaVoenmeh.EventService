@@ -1,7 +1,9 @@
 ﻿using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Create;
+using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Update;
 using AfishaVoenmeh.EventService.Application.Features.Event.Queries.GetById;
 using AfishaVoenmeh.EventService.Contracts.Requests;
 using AfishaVoenmeh.EventService.Contracts.Responses;
+using ErrorOr;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +39,18 @@ public class EventsController : ControllerBase
     public async Task<IActionResult> CreateEventAsync([FromBody] CreateEventRequest request, CancellationToken ct)
     {
         var command = _mapper.Map<CreateEventCommand>(request);
+
+        var result = await _sender.Send(command, ct);
+
+        return result.Match<IActionResult>(
+            eventDto => Created(HttpContext.Request.Path, _mapper.Map<EventResponse>(eventDto)),
+            errors => BadRequest(errors));
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateEventAsync([FromBody] UpdateEventRequest request, CancellationToken ct)
+    {
+        var command = _mapper.Map<UpdateEventCommand>(request);
 
         var result = await _sender.Send(command, ct);
 

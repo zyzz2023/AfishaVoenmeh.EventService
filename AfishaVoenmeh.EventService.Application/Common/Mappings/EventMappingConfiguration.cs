@@ -1,4 +1,5 @@
-﻿using AfishaVoenmeh.EventService.Application.Features.Event.Common;
+﻿using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Update;
+using AfishaVoenmeh.EventService.Application.Features.Event.Common;
 using AfishaVoenmeh.EventService.Domain.EventAggregate;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 using Mapster;
@@ -29,5 +30,7 @@ public class EventMappingConfiguration : IRegister
                 src => src.ImageUrl.Value)
             .Map(dest => dest.Location,
                 src => src.Location.Adapt<LocationDto>());
+
+        config.NewConfig<UpdateEventCommand, EventDto>();
     }
 }
