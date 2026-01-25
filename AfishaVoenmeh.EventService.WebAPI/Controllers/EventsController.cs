@@ -1,4 +1,5 @@
 ﻿using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Archive;
+using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Cancel;
 using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Create;
 using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Delete;
 using AfishaVoenmeh.EventService.Application.Features.Event.Commands.Update;
@@ -72,10 +73,22 @@ public class EventsController : ControllerBase
             errors => BadRequest(errors));
     }
 
-    [HttpPost("Archive/{id:guid}")]
+    [HttpPost("{id:guid}/archive")]
     public async Task<IActionResult> ArchiveEventAsync([FromRoute] Guid id, CancellationToken ct)
     {
         var command = new ArchiveEventCommand(id);
+
+        var result = await _sender.Send(command, ct);
+
+        return result.Match<IActionResult>(
+            success => NoContent(),
+            errors => BadRequest(errors));
+    }
+
+    [HttpPost("{id:guid}/cancel")]
+    public async Task<IActionResult> CancelEventAsync([FromRoute] Guid id, CancellationToken ct)
+    {
+        var command = new CancelEventCommand(id);
 
         var result = await _sender.Send(command, ct);
 

@@ -24,7 +24,7 @@ public class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand, Err
         var existingEvent = await _eventRepository.GetByIdAsync(command.EventId, false, cancellationToken);
         if (existingEvent is null)
             return Error.NotFound(
-                "Event.NotFound", $"Event with id '{command.EventId}' was not found.");
+                "Event_Not_Found", $"Event with id '{command.EventId}' was not found.");
 
         await _eventRepository.DeleteAsync(existingEvent, cancellationToken);
 
