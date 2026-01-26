@@ -66,5 +66,7 @@ public class EventConfiguration : IEntityTypeConfiguration<Event>
             .HasColumnName("CreatedAt")
             .HasColumnType("timestamp with time zone")
             .IsRequired();
+
+        builder.Ignore(e => e.DomainEvents);
     }
 }

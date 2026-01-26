@@ -23,7 +23,7 @@ public class CancelEventCommandHandler : IRequestHandler<CancelEventCommand, Err
             return Error.NotFound(
                 "Event_Not_Found", $"Event with id '{command.EventId}' was not found.");
 
-        existsingEvent.ChangeStatus(Domain.EventAggregate.Enums.Status.Cancelled);
+        existsingEvent.CancelEvent();
 
         await _eventRepository.UpdateAsync(existsingEvent);
 

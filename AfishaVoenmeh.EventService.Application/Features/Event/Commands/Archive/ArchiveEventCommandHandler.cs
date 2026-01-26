@@ -23,7 +23,7 @@ public class ArchiveEventCommandHandler : IRequestHandler<ArchiveEventCommand, E
             return Error.NotFound(
                 "Event_Not_Found", $"Event with id '{command.EventId}' was not found.");
 
-        existsingEvent.ChangeStatus(Domain.EventAggregate.Enums.Status.Archived);
+        existsingEvent.ArchiveEvent();
 
         await _eventRepository.UpdateAsync(existsingEvent);
 

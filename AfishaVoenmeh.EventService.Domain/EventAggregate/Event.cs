@@ -1,4 +1,5 @@
 ﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
+using AfishaVoenmeh.EventService.Domain.EventAggregate.DomainEvents;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 
@@ -80,7 +81,55 @@ public class Event : AggregateRoot<Guid>
 
     public void ChangeLocation(Location location) => Location = location;
 
-    public void ChangeStatus(Status status) => Status = status;
-    
     public void ChangeTarget(Target target) => Target = target;
+
+    public void StartEvent()
+    {
+        if(Status == Status.Created)
+        {
+            ChangeStatus(Status.Started);
+
+            RaiseDomainEvent(new EventStartedDomainEvent(Guid.NewGuid(), Id));
+        }
+
+        // add domain error
+    }
+
+    public void FinishEvent()
+    {
+        if(Status == Status.Started)
+        {
+            ChangeStatus(Status.Finished);
+
+            RaiseDomainEvent(new EventFinishedDomainEvent(Guid.NewGuid(), Id));
+        }
+
+        // add domain error
+    }
+
+    public void CancelEvent()
+    {
+        if(Status == Status.Created || Status == Status.Started)
+        {
+            ChangeStatus(Status.Cancelled);
+
+            RaiseDomainEvent(new EventCancelledDomainEvent(Guid.NewGuid(), Id));
+        }
+
+        // add domain error
+    }
+
+    public void ArchiveEvent()
+    {
+        if(Status == Status.Finished || Status == Status.Cancelled)
+        {
+            ChangeStatus(Status.Archived);
+
+            RaiseDomainEvent(new EventArchivedDomainEvent(Guid.NewGuid(), Id));
+        }
+
+        // add domain error
+    }
+
+    private void ChangeStatus(Status status) => Status = status;
 }
