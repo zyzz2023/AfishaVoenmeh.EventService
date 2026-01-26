@@ -83,7 +83,19 @@ public class Event : AggregateRoot<Guid>
 
     public void ChangeTarget(Target target) => Target = target;
 
-    public void StartEvent()
+    public void ProcessStatus(DateTime now)
+    {
+        if(Status == Status.Created && Period.StartsAt <= now)
+        {
+            StartEvent();
+        }
+        else if(Status == Status.Started && Period.EndsAt <= now)
+        {
+            FinishEvent();
+        }
+    }
+
+    private void StartEvent()
     {
         if(Status == Status.Created)
         {
@@ -95,7 +107,7 @@ public class Event : AggregateRoot<Guid>
         // add domain error
     }
 
-    public void FinishEvent()
+    private void FinishEvent()
     {
         if(Status == Status.Started)
         {

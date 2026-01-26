@@ -21,7 +21,7 @@ public class Period : ValueObject
     {
         if ((endsAt - startsAt).TotalHours > 8)
             return DomainErrors.LongPeriod;
-
+         
         return new Period(startsAt, endsAt);
     }
     protected override IEnumerable<object> GetEqualityComponents()

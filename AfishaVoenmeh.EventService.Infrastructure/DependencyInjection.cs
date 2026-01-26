@@ -1,5 +1,6 @@
 ﻿using AfishaVoenmeh.EventService.Application.Common.Interfaces.Persistence;
 using AfishaVoenmeh.EventService.Application.Common.Interfaces.Services;
+using AfishaVoenmeh.EventService.Infrastructure.BackgroundServices;
 using AfishaVoenmeh.EventService.Infrastructure.Common;
 using AfishaVoenmeh.EventService.Infrastructure.Data;
 using AfishaVoenmeh.EventService.Infrastructure.Data.Repositories;
@@ -15,6 +16,8 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddApplicationDbContext(configuration);
+
+        services.AddHostedService<EventStatusBackgroundService>();
 
         services.AddScoped<IEventRepository, EventRepository>();
 

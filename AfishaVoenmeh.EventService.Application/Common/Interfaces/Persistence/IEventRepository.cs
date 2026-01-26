@@ -4,5 +4,8 @@ namespace AfishaVoenmeh.EventService.Application.Common.Interfaces.Persistence;
 
 public interface IEventRepository : IRepository<Event>
 {
-    // Unique methods
+    Task<IEnumerable<Event>> GetEventsForStatusProcessingAsync(
+        DateTime now,
+        bool enableTracking,
+        CancellationToken ct = default);
 }

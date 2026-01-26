@@ -10,7 +10,7 @@ namespace AfishaVoenmeh.EventService.Infrastructure.Data.Repositories;
 public abstract class Repository<TEntity> : IRepository<TEntity>
     where TEntity : class, IEntity<Guid>
 {
-    private readonly ApplicationDbContext _context;
+    protected readonly ApplicationDbContext _context;
     private readonly IPublisher _publisher;
 
     public Repository(ApplicationDbContext context, IPublisher publisher)
