@@ -25,7 +25,7 @@ public class ArchiveEventCommandHandler : IRequestHandler<ArchiveEventCommand, E
 
         existsingEvent.ArchiveEvent();
 
-        await _eventRepository.UpdateAsync(existsingEvent);
+        await _eventRepository.SaveChangesAsync();
 
         await _cacheService.RemoveAsync(command.EventId.ToString(), cancellationToken);
 

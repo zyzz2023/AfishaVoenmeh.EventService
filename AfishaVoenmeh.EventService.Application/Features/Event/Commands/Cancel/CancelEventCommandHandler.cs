@@ -25,7 +25,7 @@ public class CancelEventCommandHandler : IRequestHandler<CancelEventCommand, Err
 
         existsingEvent.CancelEvent();
 
-        await _eventRepository.UpdateAsync(existsingEvent);
+        await _eventRepository.SaveChangesAsync();
 
         await _cacheService.RemoveAsync(command.EventId.ToString(), cancellationToken);
 

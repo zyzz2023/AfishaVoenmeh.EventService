@@ -15,4 +15,6 @@ public interface IRepository<TEntity>
 
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct = default);
     Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct = default);
+
+    Task<int> SaveChangesAsync(CancellationToken ct = default);
 }
