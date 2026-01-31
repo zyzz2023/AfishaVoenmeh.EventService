@@ -35,6 +35,10 @@ public class UpdateEventCommandValidator : AbstractValidator<UpdateEventCommand>
             .NotNull()
             .WithMessage("End time cannot be null.");
 
+        RuleFor(c => c.DeadlineRegister)
+            .NotNull()
+            .WithMessage("Deadline register time cannot be null.");
+
         RuleFor(c => c.TotalSeats)
             .NotNull()
             .WithMessage("Total seats cannot be null.")

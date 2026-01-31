@@ -26,6 +26,8 @@ public class EventMappingConfiguration : IRegister
                 src => src.Period.StartsAt)
             .Map(dest => dest.EndsAt,
                 src => src.Period.EndsAt)
+            .Map(dest => dest.DeadlineRegister,
+                src => src.DeadlineRegister.Value)
             .Map(dest => dest.ImageUrl,
                 src => src.ImageUrl.Value)
             .Map(dest => dest.Location,

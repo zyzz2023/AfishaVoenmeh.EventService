@@ -35,6 +35,7 @@ public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, Err
         if (period.IsError)
             return period.FirstError;
 
+        var deadlineRegister = DeadlineRegister.Create(request.DeadlineRegister);
         var seatsNumber = SeatsNumber.Create(request.TotalSeats);
         var imageUrl = ImageUrl.Create(request.ImageUrl);
         var location = Location.Create(request.City, request.Street, request.Number);
@@ -43,6 +44,7 @@ public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, Err
         exitstsingEvent.ChangeTitle(request.Title);
         exitstsingEvent.ChangeDescription(request.Description);
         exitstsingEvent.ChangePeriod(period.Value);
+        exitstsingEvent.ChangeDeadlineRegister(deadlineRegister);
         exitstsingEvent.ChangeSeatsNumber(seatsNumber);
         exitstsingEvent.ChangeImageUrl(imageUrl);
         exitstsingEvent.ChangeLocation(location);

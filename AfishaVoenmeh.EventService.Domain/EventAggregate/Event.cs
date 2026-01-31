@@ -11,6 +11,7 @@ public class Event : AggregateRoot<Guid>
     public string Description { get; private set; } = string.Empty;
 
     public Period Period { get; private set; }
+    public DeadlineRegister DeadlineRegister { get; private set; }
     public SeatsNumber SeatsNumber { get; private set; }
     public ImageUrl ImageUrl { get; private set; }
     public Location Location {  get; private set; }
@@ -25,6 +26,7 @@ public class Event : AggregateRoot<Guid>
         string title,
         string description,
         Period period,
+        DeadlineRegister deadlineRegister,
         SeatsNumber seatsNumber,
         ImageUrl imageUrl,
         Location location,
@@ -36,6 +38,7 @@ public class Event : AggregateRoot<Guid>
         Description = description;
 
         Period = period;
+        DeadlineRegister = deadlineRegister;
         SeatsNumber = seatsNumber;
         ImageUrl = imageUrl;
         Location = location;
@@ -49,6 +52,7 @@ public class Event : AggregateRoot<Guid>
         string title,
         string description,
         Period period,
+        DeadlineRegister deadlineRegister,
         SeatsNumber seatsNumber,
         ImageUrl imageUrl,
         Location location,
@@ -60,7 +64,8 @@ public class Event : AggregateRoot<Guid>
         return new Event(
             title, 
             description, 
-            period, 
+            period,
+            deadlineRegister,
             seatsNumber, 
             imageUrl, 
             location, 
@@ -74,6 +79,8 @@ public class Event : AggregateRoot<Guid>
     public void ChangeDescription(string description) => Description = description;
 
     public void ChangePeriod(Period period) => Period = period;
+
+    public void ChangeDeadlineRegister(DeadlineRegister deadlineRegister) => DeadlineRegister = deadlineRegister;
 
     public void ChangeSeatsNumber(SeatsNumber seatsNumber) => SeatsNumber = seatsNumber;
 

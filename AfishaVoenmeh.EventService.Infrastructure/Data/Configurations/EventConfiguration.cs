@@ -23,6 +23,13 @@ public class EventConfiguration : IEntityTypeConfiguration<Event>
                 .HasColumnType("timestamp with time zone");
         });
 
+        builder.OwnsOne(e => e.DeadlineRegister, ba =>
+        {
+            ba.Property(d => d.Value)
+            .HasColumnName("DeadlineRegister")
+            .HasColumnType("timestamp with time zone");
+        });
+
         builder.OwnsOne(e => e.SeatsNumber, ba =>
         {
             ba.Property(sn => sn.Total)

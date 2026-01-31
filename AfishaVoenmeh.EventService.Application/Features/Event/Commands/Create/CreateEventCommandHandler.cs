@@ -26,6 +26,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Err
         if (period.IsError)
             return period.FirstError;
 
+        var deadlineRegister = DeadlineRegister.Create(request.DeadlineRegister);
         var seatsNumber = SeatsNumber.Create(request.TotalSeats);
         var imageUrl = ImageUrl.Create(request.ImageUrl);
         var location = Location.Create(request.City, request.Street, request.Number);
@@ -36,6 +37,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Err
             request.Title,
             request.Description,
             period.Value,
+            deadlineRegister,
             seatsNumber,
             imageUrl,
             location,

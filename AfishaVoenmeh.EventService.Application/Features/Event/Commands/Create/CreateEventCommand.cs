@@ -1,5 +1,6 @@
 ﻿using AfishaVoenmeh.EventService.Application.Features.Event.Common;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
+using AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 using ErrorOr;
 using MediatR;
 
@@ -10,6 +11,7 @@ public record CreateEventCommand(
     string Description,
     DateTime StartsAt,
     DateTime EndsAt,
+    DateTime DeadlineRegister,
     int TotalSeats,
     string ImageUrl,
     string City,

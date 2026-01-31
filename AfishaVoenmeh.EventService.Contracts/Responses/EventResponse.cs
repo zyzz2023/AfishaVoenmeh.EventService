@@ -9,6 +9,7 @@ public class EventResponse
     public string Description { get; init; } = string.Empty;
     public DateTime StartsAt { get; init; }
     public DateTime EndsAt { get; init; }
+    public DateTime DeadlineRegister { get; init; }
     public int TotalSeats { get; init; }
     public int CurrentSeats { get; init; }
     public string ImageUrl { get; init; } = string.Empty;

@@ -12,6 +12,7 @@ public record UpdateEventRequest(
     string Description,
     DateTime StartsAt,
     DateTime EndsAt,
+    DateTime DeadlineRegister,
     int TotalSeats,
     string ImageUrl,
     string City,
