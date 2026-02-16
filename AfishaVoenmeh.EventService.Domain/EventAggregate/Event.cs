@@ -1,7 +1,9 @@
 ﻿using AfishaVoenmeh.EventService.Domain.Common.Abstract;
+using AfishaVoenmeh.EventService.Domain.Common.Errors;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.DomainEvents;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.Enums;
 using AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
+using ErrorOr;
 
 namespace AfishaVoenmeh.EventService.Domain.EventAggregate;
 
@@ -148,6 +150,43 @@ public class Event : AggregateRoot<Guid>
         }
 
         // add domain error
+    }
+
+    public ErrorOr<bool> ReserveSeat(Target userRole)
+    {
+        if(userRole != Target)
+        {
+            return DomainErrors.IncorrectRoleForEvent;
+        }
+        if (DeadlineRegister.Value <= DateTime.UtcNow)
+        {
+            return DomainErrors.DeadlineRegisterExpired;
+        }
+        if (SeatsNumber.Current <= 0)
+        {
+            return DomainErrors.NotEnoughSeats;
+        }
+        if(Status != Status.Created && Status != Status.Started)
+        {
+            return DomainErrors.EventStatusIncorrect;
+        }
+
+        SeatsNumber.Increase();
+
+        return true;
+    }
+
+    public ErrorOr<bool> CancelSeatReservation()
+    {
+        // Рассмотреть разные варианты ошибок для отмены бронирования
+        if(Status != Status.Created || Status != Status.Started)
+        {
+            return DomainErrors.DeadlineRegisterExpired;
+        }
+
+        SeatsNumber.Decrease();
+
+        return true;
     }
 
     private void ChangeStatus(Status status) => Status = status;

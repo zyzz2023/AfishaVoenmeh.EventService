@@ -21,4 +21,22 @@ public static class DomainErrors
     public static Error CurrentSeatsIncorrect =>
         Error.Validation("SeatsNumber_Current_Incorrect",
                 "Current available seats cannot be larger than total seats.");
+
+    // ------------------ RESERVE ERRORS ------------------
+
+    public static Error NotEnoughSeats =>
+        Error.Validation("SeatsNumber_NotEnough",
+            "Not enough available seats for the reservation.");
+
+    public static Error IncorrectRoleForEvent =>
+        Error.NotFound("Incorrect_Role", 
+            "Reservation is not possible because the user's role does not match the target audience of the event");
+
+    public static Error DeadlineRegisterExpired =>
+        Error.Validation("DeadlineRegister_Expired", 
+            "The registration deadline for this event has expired.");
+
+    public static Error EventStatusIncorrect =>
+        Error.Validation("Event_Status_Incorrect",
+            "The event is not in a state that allows this operation.");
 }

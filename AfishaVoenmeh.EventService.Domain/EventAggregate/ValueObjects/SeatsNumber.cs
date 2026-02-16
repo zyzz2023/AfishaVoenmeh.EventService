@@ -19,6 +19,11 @@ public class SeatsNumber : ValueObject
 
     public static SeatsNumber Create(int total) => new(total);
 
+    // TODO: Сделать иммутабельным и возвращать новый объект при изменении количества мест (!!!!)
+    public void Decrease() => Current += 1;
+
+    public void Increase() => Current -= 1; 
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Total;

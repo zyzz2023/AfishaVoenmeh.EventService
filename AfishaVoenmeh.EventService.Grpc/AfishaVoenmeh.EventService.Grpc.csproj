@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a7cc57f8-0498-4049-86fd-4cd9c2d84deb</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.76.0" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AfishaVoenmeh.Shared\AfishaVoenmeh.Shared.Contracts\AfishaVoenmeh.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.Application\AfishaVoenmeh.EventService.Application.csproj" />
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.Contracts\AfishaVoenmeh.EventService.Contracts.csproj" />
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.Infrastructure\AfishaVoenmeh.EventService.Infrastructure.csproj" />
+    <ProjectReference Include="..\AfishaVoenmeh.EventService.WebAPI\AfishaVoenmeh.EventService.WebAPI.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -4,7 +4,7 @@ namespace AfishaVoenmeh.EventService.Domain.EventAggregate.ValueObjects;
 
 public class DeadlineRegister : ValueObject
 {
-    public DateTime Value { get; set; }
+    public DateTime Value { get; private set; }
 
     private DeadlineRegister(DateTime value) => Value = value;
     
